@@ -8,6 +8,14 @@
 #include<sys/socket.h>
 #include<arpa/inet.h>
 
+typedef struct Arg{
+    int new_fd;
+
+}
+
+void CreateWorker(int new_fd, sockaddr_in* peer_addr){
+
+}
 
 int main(int argc, char* argv[])
 {
@@ -48,22 +56,7 @@ int main(int argc, char* argv[])
 
         char buf_recv[1024] = {'\0'};
         char buf_send[1024] = {'\0'};
-        while(1){
-            int ret = recv(new_sock, buf_recv, sizeof(buf_recv) - 1, 0);
-            if(ret < 0){
-                perror("recv");
-                continue;
-            }
-            if(ret == 0){
-                printf("client Done");
-                break;
-            }
-            printf("client: %s\n", buf_recv);
-            memset(buf_recv,'\0',sizeof(buf_recv));
-            read(0, buf_send, sizeof(buf_send) - 1);
-            send(new_sock, buf_send, strlen(buf_send) - 1, 0);
-            memset(buf_send,'\0',sizeof(buf_send));
-        }
+        
     }
     close(listen_sock);
     return 0;
